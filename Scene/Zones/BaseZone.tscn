@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://hj3tt0gklwba"]
+[gd_scene load_steps=76 format=3 uid="uid://hj3tt0gklwba"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bjavywoj00j1j" path="res://Scene/Zones/BaseZoneAct2.tscn" id="2_8ek7k"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://7k14xkpjguop" path="res://Entities/Obstacles/SwingingPlatform.tscn" id="11_wdcc0"]
 [ext_resource type="Script" path="res://Scripts/Objects/CollapsePlatform.gd" id="12_ri3yl"]
 [ext_resource type="TileSet" uid="uid://dn42tsjf760q0" path="res://Graphics/Tiles/MCZPlatform.tres" id="13_biut5"]
+[ext_resource type="TileSet" uid="uid://do02bj1frmt32" path="res://Tileset/Worlds/FrostbiteGlacier.tres" id="14_hs67m"]
 [ext_resource type="PackedScene" uid="uid://dkn7hhll7o4or" path="res://Entities/MainObjects/LayerSwitcher.tscn" id="14_wjddb"]
 [ext_resource type="PackedScene" uid="uid://4q0hpddgto2k" path="res://Entities/Gimmicks/Spring.tscn" id="15_sn1cn"]
 [ext_resource type="PackedScene" uid="uid://dwybbnboecmkw" path="res://Entities/Obstacles/Bumper.tscn" id="16_opp4y"]
@@ -410,7 +411,7 @@ speed = 6.0
 soundDelay = 0.0
 
 [node name="Tiles" type="TileMap" parent="Platforms/WidePlatform"]
-tile_set = ExtResource("6_xw1le")
+tile_set = ExtResource("14_hs67m")
 format = 2
 layer_0/name = "default"
 layer_0/tile_data = PackedInt32Array(-131072, 131075, 0, -65536, 131075, 1, -131071, 131075, 0, -65535, 131075, 1, -131070, 131075, 0, -65534, 131075, 1, -131069, 131075, 0, -65533, 131075, 1, -131068, 131075, 0, -65532, 131075, 1, -131067, 131075, 0, -65531, 131075, 1, -131066, 131075, 0, -65530, 131075, 1, -131065, 131075, 0, -65529, 131075, 1, -131064, 131075, 0, -65528, 131075, 1, -131063, 131075, 0, -65527, 131075, 1, -131062, 131075, 0, -65526, 131075, 1, -131061, 131075, 0, -65525, 131075, 1, -131060, 131075, 0, -65524, 131075, 1, -131059, 131075, 0, -65523, 131075, 1, -131058, 131075, 0, -65522, 131075, 1, -131057, 131075, 0, -65521, 131075, 1)

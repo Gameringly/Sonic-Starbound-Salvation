@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b1seuwudtbbgk"
+path="res://.godot/imported/Starbound Salvation - Frostbite Glacier.ogg-6864fc6748c5fa9bb044cad13dd13864.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Soundtrack/Starbound Salvation - Frostbite Glacier.ogg"
+dest_files=["res://.godot/imported/Starbound Salvation - Frostbite Glacier.ogg-6864fc6748c5fa9bb044cad13dd13864.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
