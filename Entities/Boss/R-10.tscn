@@ -1,16 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://p611c0ge0y1p"]
+[gd_scene load_steps=16 format=3 uid="uid://p611c0ge0y1p"]
 
-[ext_resource type="Script" path="res://Scripts/Boss/BossBase.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Boss/r_10.gd" id="1_a2wls"]
 [ext_resource type="AudioStream" uid="uid://bvhfglhmpystw" path="res://Audio/SFX/Boss/Hit.wav" id="2"]
 [ext_resource type="Texture2D" uid="uid://bf67y745fs58e" path="res://Graphics/Boss/R-10.png" id="2_180dk"]
 [ext_resource type="Texture2D" uid="uid://baeawjurelkfd" path="res://Graphics/Boss/R-10_hand.png" id="3_la38y"]
 [ext_resource type="Texture2D" uid="uid://cpuratr5qi0" path="res://Graphics/Boss/R-10_laser.png" id="5_ftiqf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8cic"]
-size = Vector2(32, 40)
+size = Vector2(32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmdef"]
-size = Vector2(32, 40)
+size = Vector2(32, 48)
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(16, 24)
@@ -18,18 +18,115 @@ size = Vector2(16, 24)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8r3f"]
 size = Vector2(8, 32)
 
+[sub_resource type="Animation" id="Animation_rnjm0"]
+resource_name = "rise"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EggMobile:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -48), Vector2(0, -64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -48), Vector2(0, -64)]
+}
+
+[sub_resource type="Animation" id="Animation_77tnk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EggMobile:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -48)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfxcj"]
+_data = {
+"RESET": SubResource("Animation_77tnk"),
+"rise": SubResource("Animation_rnjm0")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o8812"]
+animation = &"rise"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ahj13"]
+advance_mode = 2
+advance_expression = "active"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xj2ty"]
+states/rise/node = SubResource("AnimationNodeAnimation_o8812")
+states/rise/position = Vector2(368, 100)
+transitions = ["Start", "rise", SubResource("AnimationNodeStateMachineTransition_ahj13")]
+
 [node name="Boss" type="CharacterBody2D"]
 collision_layer = 16384
 collision_mask = 0
-script = ExtResource("1")
+script = ExtResource("1_a2wls")
 
 [node name="EggMobile" type="Sprite2D" parent="."]
 texture = ExtResource("2_180dk")
-offset = Vector2(0, -8)
+offset = Vector2(0, 8)
 
-[node name="LeftHand" type="RigidBody2D" parent="."]
-position = Vector2(-96, 0)
-mass = 300.0
+[node name="LeftHand" type="StaticBody2D" parent="."]
+position = Vector2(-96, 48)
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftHand"]
 texture = ExtResource("3_la38y")
@@ -37,9 +134,8 @@ texture = ExtResource("3_la38y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftHand"]
 shape = SubResource("RectangleShape2D_c8cic")
 
-[node name="RightHand" type="RigidBody2D" parent="."]
-position = Vector2(96, 0)
-mass = 300.0
+[node name="RightHand" type="StaticBody2D" parent="."]
+position = Vector2(96, 48)
 
 [node name="Sprite2D" type="Sprite2D" parent="RightHand"]
 texture = ExtResource("3_la38y")
@@ -49,7 +145,7 @@ flip_h = true
 shape = SubResource("RectangleShape2D_qmdef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -64)
+position = Vector2(0, -48)
 shape = SubResource("5")
 
 [node name="Hit" type="AudioStreamPlayer" parent="."]
@@ -57,7 +153,7 @@ stream = ExtResource("2")
 bus = &"SFX"
 
 [node name="HitBox" type="Area2D" parent="."]
-position = Vector2(0, -64)
+position = Vector2(0, -48)
 collision_layer = 0
 collision_mask = 528384
 
@@ -88,6 +184,16 @@ offset = Vector2(0, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser2"]
 position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_i8r3f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rfxcj")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_xj2ty")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_DamageArea_area_entered"]
 [connection signal="area_exited" from="HitBox" to="." method="_on_HitBox_area_exited"]

@@ -1,7 +1,7 @@
 class_name BossBase extends CharacterBody2D
 
 @export_enum("Normal", "Fire", "Elec", "Water") var damageType = 0
-var playerHit: Array[Area2D] = []
+var playerHit: Array[CharacterBody2D] = []
 
 @export var hp: int = 8
 var flashTimer: int = 0
@@ -15,7 +15,6 @@ signal defeated
 signal boss_over
 
 var active: bool = false
-
 
 func _physics_process(delta: float) -> void:
 	# flashing timer
@@ -60,12 +59,10 @@ func _on_body_entered(body: Node2D) -> void:
 	if (!playerHit.has(body)):
 		playerHit.append(body)
 
-
 func _on_body_exited(body: Node2D) -> void:
 	# remove from player list
 	if (playerHit.has(body)):
 		playerHit.erase(body)
-
 
 func _on_DamageArea_area_entered(area: Area2D) -> void:
 	# damage checking
@@ -73,7 +70,6 @@ func _on_DamageArea_area_entered(area: Area2D) -> void:
 		if !playerHit.has(area.parent):
 			forceDamage = true
 			playerHit.append(area.parent)
-
 
 func _on_HitBox_area_exited(area: Area2D) -> void:
 	# remove from damage area
